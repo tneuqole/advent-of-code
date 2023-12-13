@@ -15,10 +15,65 @@ func check(e error) {
     }
 }
 
-func p1(hands []hand) {
+type hand struct {
+    cards string
+    winnings int
+    score int
+}
+
+func scoreHand(s string, joker bool) int {
+    m := make(map[string]int)
+    for _, c := range s {
+        c := string(c)
+        if _, contains := m[c]; contains {
+            m[c] += 1
+        } else {
+            m[c] = 1
+        }
+    }
+
+    l := len(m)
+    var count int
+    for k, v := range m {
+        if joker && k == "J" {
+            continue
+        }
+
+        if v > count {
+            count = v
+        }
+    }
+
+    if v, contains := m["J"]; contains && joker {
+        count += v
+        l -= 1
+    }
+
+    if count == 5 {
+        return 7
+    } else if count == 4 {
+        return 6
+    } else if count == 3 && l == 2 {
+        return 5
+    } else if count == 3 {
+        return 4
+    } else if count == 2 && l == 3 {
+        return 3
+    } else if count == 2 {
+        return 2
+    }
+
+    return 1
+}
+
+func sortHands(hands []hand, joker bool) int {
     sort.Slice(hands, func(i, j int) bool {
         h1 := hands[i]
         h2 := hands[j]
+
+        h1.score = scoreHand(h1.cards, joker)
+        h2.score = scoreHand(h2.cards, joker)
+        
         if h1.score == h2.score {
             for idx, c1 := range h1.cards {
                 c1 := string(c1)
@@ -26,6 +81,12 @@ func p1(hands []hand) {
 
                 if c1 == c2 {
                     continue
+                }
+
+                if joker && c1 == "J" {
+                    return true
+                } else if joker && c2 == "J" {
+                    return false
                 }
 
                 n1, err1 := strconv.Atoi(c1)
@@ -61,53 +122,18 @@ func p1(hands []hand) {
     for idx, h := range hands {
         sum += (idx+1)*h.winnings
     }
+
+    return sum
+}
+
+func p1(hands []hand) {
+    sum := sortHands(hands, false)
     fmt.Println("problem 1: ", sum)
 }
 
-func p2() {
-    fmt.Println("problem 2: ")
-}
-
-type hand struct {
-    cards string
-    winnings int
-    score int
-}
-
-func scoreHand(s string) int {
-    m := make(map[string]int)
-    for _, c := range s {
-        c := string(c)
-        if _, contains := m[c]; contains {
-            m[c] += 1
-        } else {
-            m[c] = 1
-        }
-    }
-
-    l := len(m)
-    var count int
-    for _, v := range m {
-        if v > count {
-            count = v
-        }
-    }
-
-    if count == 5 {
-        return 7
-    } else if count == 4 {
-        return 6
-    } else if count == 3 && l == 2 {
-        return 5
-    } else if count == 3 {
-        return 4
-    } else if count == 2 && l == 3 {
-        return 3
-    } else if count == 2 {
-        return 2
-    }
-
-    return 1
+func p2(hands []hand) {
+    sum := sortHands(hands, true)
+    fmt.Println("problem 2: ", sum)
 }
 
 func main() {
@@ -124,11 +150,10 @@ func main() {
         h := hand {
             cards: fields[0],
             winnings: w,
-            score: scoreHand(fields[0]),
         }
         hands = append(hands, h)
     }
 
     p1(hands)
-    p2()
+    p2(hands)
 }
