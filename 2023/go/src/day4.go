@@ -9,13 +9,7 @@ import (
 	"strings"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
-func p1() {
+func d4p1() {
     file, err := os.Open("day4.txt")
     check(err)
     defer file.Close()
@@ -88,7 +82,7 @@ func countCopies(idx int) int {
     return copies
 }
 
-func p2() {
+func d4p2() {
     parseCards()
     var copies int
     for i := 0; i < len(cards); i++ {
@@ -98,8 +92,8 @@ func p2() {
     fmt.Println("problem 2: ", copies)
 }
 
-func main() {
-    p1()
-    p2()
+func d4() {
+    d4p1()
+    d4p2()
 }
 

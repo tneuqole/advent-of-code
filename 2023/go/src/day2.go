@@ -8,17 +8,11 @@ import (
 	"strings"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
 const maxRed int = 12
 const maxGreen int = 13
 const maxBlue int = 14
 
-func p1() {
+func d2p1() {
     file, err := os.Open("day2.txt")
     check(err)
     defer file.Close()
@@ -64,7 +58,7 @@ func p1() {
     fmt.Println("problem 1: ", sum)
 }
 
-func p2() {
+func d2p2() {
     file, err := os.Open("day2.txt")
     check(err)
     defer file.Close()
@@ -110,7 +104,7 @@ func p2() {
 
 
 
-func main() {
-    p1()
-    p2()
+func d2() {
+    d2p1()
+    d2p2()
 }

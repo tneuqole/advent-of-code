@@ -9,13 +9,7 @@ import (
 	"strings"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
-func p1(times []string, dist[]string) {
+func d6p1(times []string, dist[]string) {
     sum := 1
     for idx, time := range times {
         t, _ := strconv.Atoi(time)
@@ -45,7 +39,7 @@ func getNum(nums []string) int {
     return result
 }
 
-func p2(times []string, dist []string) {
+func d6p2(times []string, dist []string) {
     t := getNum(times)
     d := getNum(dist)
     var count int
@@ -58,7 +52,7 @@ func p2(times []string, dist []string) {
 }
 
 
-func main() {
+func d6() {
     file, err := os.Open("day6.txt")
     check(err)
     defer file.Close()
@@ -69,6 +63,6 @@ func main() {
     scanner.Scan()
     distances := strings.Fields(strings.Split(scanner.Text(), ":")[1])
     
-    p1(times, distances)
-    p2(times, distances)
+    d6p1(times, distances)
+    d6p2(times, distances)
 }

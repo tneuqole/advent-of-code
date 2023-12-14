@@ -8,13 +8,7 @@ import (
 	"strings"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
-func p1(seqs [][]int) {
+func d9p1(seqs [][]int) {
     var sum int
     for _, seq := range seqs {
         hist := make([][]int, 1)
@@ -49,7 +43,7 @@ func p1(seqs [][]int) {
     fmt.Println("problem 1: ", sum)
 }
 
-func p2(seqs [][]int) {
+func d9p2(seqs [][]int) {
     var sum int
     for _, seq := range seqs {
         hist := make([][]int, 1)
@@ -84,7 +78,7 @@ func p2(seqs [][]int) {
     fmt.Println("problem 2: ", sum)
 }
 
-func main() {
+func d9() {
     file, err := os.Open("day9.txt")
     check(err)
     defer file.Close()
@@ -102,6 +96,6 @@ func main() {
         seqs = append(seqs, seq)
     }
 
-    p1(seqs)
-    p2(seqs)
+    d9p1(seqs)
+    d9p2(seqs)
 }

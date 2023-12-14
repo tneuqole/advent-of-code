@@ -9,12 +9,6 @@ import (
 	"time"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
 type seed struct {
     num int
     soil int
@@ -75,7 +69,7 @@ func findMapping(num int, list []mapping) int {
     return num
 }
 
-func p1() {
+func d5p1() {
     file, err := os.Open("day5.txt")
     check(err)
     defer file.Close()
@@ -117,7 +111,7 @@ func p1() {
     fmt.Println("problem 1: ", lowest)
 }
 
-func p2() {
+func d5p2() {
     file, err := os.Open("day5.txt")
     check(err)
     defer file.Close()
@@ -162,11 +156,11 @@ func p2() {
 }
 
 
-func main() {
-    // p1()
+func d5() {
+    d5p1()
 
     start := time.Now()
-    p2()
+    d5p2()
     fmt.Println("elapsed: ", time.Now().Sub(start))
 }
 

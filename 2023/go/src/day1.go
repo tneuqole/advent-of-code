@@ -8,13 +8,7 @@ import (
 	"strings"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
-func p1() {
+func d1p1() {
     file, err := os.Open("day1.txt")
     check(err)
     defer file.Close()
@@ -117,7 +111,7 @@ func findMaxWord(s string) (int, int) {
     return index, strtonum(res) 
 }
 
-func p2() {
+func d1p2() {
     file, err := os.Open("day1.txt")
     check(err)
     defer file.Close()
@@ -149,7 +143,7 @@ func p2() {
     fmt.Println("problem 2: ", sum)
 }
 
-func main() {
-    p1()
-    p2()
+func d1() {
+    d1p1()
+    d1p2()
 }

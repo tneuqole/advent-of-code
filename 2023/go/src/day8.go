@@ -8,13 +8,7 @@ import (
 	"time"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
-func p1(lr string, m map[string][2]string) {
+func d8p1(lr string, m map[string][2]string) {
     var i, count int
     key := "AAA"
     for {
@@ -65,7 +59,7 @@ func gcd(a int, b int) int {
 }
 
 
-func p2(lr string, m map[string][2]string, keys []string) {
+func d8p2(lr string, m map[string][2]string, keys []string) {
     var counts []int
     for _, key := range keys {
         var i, count int
@@ -101,7 +95,7 @@ func p2(lr string, m map[string][2]string, keys []string) {
 
 
 
-func main() {
+func d8() {
     file, err := os.Open("day8.txt")
     check(err)
     defer file.Close()
@@ -124,8 +118,8 @@ func main() {
         }
     }
 
-    p1(lr, m)
+    d8p1(lr, m)
     t := time.Now()
-    p2(lr, m, start)
+    d8p2(lr, m, start)
     fmt.Println("elapsed: ", time.Now().Sub(t))
 }

@@ -9,12 +9,6 @@ import (
 	"strings"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
 type hand struct {
     cards string
     winnings int
@@ -126,17 +120,17 @@ func sortHands(hands []hand, joker bool) int {
     return sum
 }
 
-func p1(hands []hand) {
+func d7p1(hands []hand) {
     sum := sortHands(hands, false)
     fmt.Println("problem 1: ", sum)
 }
 
-func p2(hands []hand) {
+func d7p2(hands []hand) {
     sum := sortHands(hands, true)
     fmt.Println("problem 2: ", sum)
 }
 
-func main() {
+func d7() {
     file, err := os.Open("day7.txt")
     check(err)
     defer file.Close()
@@ -154,6 +148,6 @@ func main() {
         hands = append(hands, h)
     }
 
-    p1(hands)
-    p2(hands)
+    d7p1(hands)
+    d7p2(hands)
 }

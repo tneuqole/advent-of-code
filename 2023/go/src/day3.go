@@ -8,12 +8,6 @@ import (
 	"strings"
 )
 
-func check(e error) {
-    if e != nil {
-        panic(e)
-    }
-}
-
 type gear struct {
     ratio int
     count int
@@ -109,7 +103,7 @@ func checkNum(s string, row int, column int) (bool, int, int) {
     return false, -1, -1
 }
 
-func p1() {
+func d3p1() {
     var sum int
     for rowNum, row := range data {
         var i int
@@ -140,7 +134,7 @@ func p1() {
     fmt.Println("problem 1: ", sum)
 }
 
-func p2() {
+func d3p2() {
     var sum int 
     for i := 0; i < size; i++ {
         for j := 0; j < size; j++ {
@@ -154,10 +148,8 @@ func p2() {
     fmt.Println("problem 2: ", sum)
 }
 
-
-
-func main() {
+func d3() {
     createMatrix()
-    p1()
-    p2()
+    d3p1()
+    d3p2()
 }
