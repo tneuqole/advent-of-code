@@ -38,6 +38,7 @@ func p1(seqs [][]int) {
             current = next
         }
 
+        hist[len(hist)-1] = append(hist[len(hist)-1], 0)
         for i := len(hist)-1; i > 0; i-- {
             a := hist[i][len(hist[i])-1] + hist[i-1][len(hist[i-1])-1]
             hist[i-1] = append(hist[i-1], a)
@@ -48,10 +49,40 @@ func p1(seqs [][]int) {
     fmt.Println("problem 1: ", sum)
 }
 
-func p2() {
-    fmt.Println("problem 2: ")
-}
+func p2(seqs [][]int) {
+    var sum int
+    for _, seq := range seqs {
+        hist := make([][]int, 1)
+        hist[0] = seq
+        current := seq
 
+        var zero bool
+        for !zero {
+            var next []int
+            zero = true
+            for i := 0; i < len(current)-1; i++ {
+                n := current[i+1] - current[i]
+                next = append(next, n)
+
+                if n != 0 && zero {
+                    zero = false
+                }
+            }
+
+            hist = append(hist, next)
+            current = next
+        }
+
+        hist[len(hist)-1] = append([]int{0}, hist[len(hist)-1]...)
+        for i := len(hist)-1; i > 0; i-- {
+            a := hist[i-1][0] - hist[i][0]
+            hist[i-1] = append([]int{a}, hist[i-1]...)
+        }
+
+        sum += hist[0][0]
+    }
+    fmt.Println("problem 2: ", sum)
+}
 
 func main() {
     file, err := os.Open("day9.txt")
@@ -72,5 +103,5 @@ func main() {
     }
 
     p1(seqs)
-    p2()
+    p2(seqs)
 }
