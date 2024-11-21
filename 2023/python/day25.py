@@ -4,7 +4,7 @@ from copy import deepcopy
 from datetime import datetime
 from pprint import pprint
 
-from input import input, test_input  # local file, not committed
+from input import *  # local file, not committed
 
 
 def kargers(graph):
@@ -15,7 +15,9 @@ def kargers(graph):
         new_v = f"{v1}-{v2}"
 
         graph[v1].extend(graph[v2])
-        graph[new_v] = [n for n in graph[v1] if n not in [v1, v2]]
+        new_e = [n for n in graph[v1] if n not in [v1, v2]]
+        if len(new_e) > 0:
+            graph[new_v] = new_e
 
         del graph[v1]
         del graph[v2]
