@@ -7,7 +7,6 @@ from pprint import pprint
 
 start = datetime.now()
 
-# python3 template.py < input
 input = open(0).read().splitlines()
 pprint(input)
 
