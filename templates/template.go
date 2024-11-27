@@ -15,7 +15,7 @@ func dp2() {
 }
 
 func main() {
-	file, err := os.Open("test.txt")
+	file, err := os.Open("test")
 	if err != nil {
 		panic(err)
 	}
@@ -24,7 +24,7 @@ func main() {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		s := scanner.Text()
-		fmt.Println("read line: ", s)
+		fmt.Println(s)
 	}
 
 	dp1()
