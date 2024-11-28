@@ -4,7 +4,6 @@ from copy import copy, deepcopy
 from datetime import datetime
 from pprint import pprint
 
-
 start = datetime.now()
 
 input = open(0).read().splitlines()

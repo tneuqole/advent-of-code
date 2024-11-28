@@ -1,9 +1,9 @@
 import functools
 import itertools
+from collections import defaultdict
 from copy import copy, deepcopy
 from datetime import datetime
 from pprint import pprint
-from collections import defaultdict
 
 from input import *
 
