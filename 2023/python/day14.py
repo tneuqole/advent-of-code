@@ -1,8 +1,5 @@
-import functools
-import itertools
-from copy import copy, deepcopy
+from copy import deepcopy
 from datetime import datetime
-from pprint import pprint
 
 from input import *
 

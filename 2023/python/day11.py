@@ -1,5 +1,4 @@
 from itertools import combinations
-from pprint import pprint
 
 from input import *
 

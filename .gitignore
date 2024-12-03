@@ -5,3 +5,6 @@
 **/test
 tmp/
 aoc
+.env
+log
+test*

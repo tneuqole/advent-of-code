@@ -2,7 +2,6 @@ import random
 from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
-from pprint import pprint
 
 from input import *  # local file, not committed
 
