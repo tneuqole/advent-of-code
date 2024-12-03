@@ -1,4 +1,4 @@
-.PHONY format
+.PHONY: format
 format:
 	uv run isort .
 	uv run ruff format
