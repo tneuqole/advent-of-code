@@ -14,7 +14,7 @@ def run(program: list[int]) -> int:
         op = int(ins[3:])
         modes = ins[:3]
 
-        # add numbers from pos 1 & 2 and store result in pos 3
+        # addition: program[p3] = p1 + p2
         if op == 1:
             p1 = program[i + 1]
             p2 = program[i + 2]
@@ -26,7 +26,7 @@ def run(program: list[int]) -> int:
             program[pos] = x + y
 
             i += 4
-        # multiply numbers from pos 1 & 2 and store result in pos 3
+        # multiplication: program[p3] = p1 * p2
         elif op == 2:
             p1 = program[i + 1]
             p2 = program[i + 2]
@@ -38,19 +38,19 @@ def run(program: list[int]) -> int:
             program[pos] = x * y
 
             i += 4
-        # stdin
+        # stdin: program[p1] = input()
         elif op == 3:
             pos = program[i + 1]
             program[pos] = int(input("> "))
 
             i += 2
-        # stdout
+        # stdout: print(program[p1])
         elif op == 4:
             pos = program[i + 1]
             print(program[pos])
 
             i += 2
-        # jump if truthy
+        # jump if truthy: i = p2 if p1
         elif op == 5:
             p1 = program[i + 1]
             p2 = program[i + 2]
@@ -62,7 +62,7 @@ def run(program: list[int]) -> int:
                 i = jump_to
             else:
                 i += 3
-        # jump if falsey
+        # jump if falsely: i = p2 if not p1
         elif op == 6:
             p1 = program[i + 1]
             p2 = program[i + 2]
@@ -74,7 +74,7 @@ def run(program: list[int]) -> int:
                 i = jump_to
             else:
                 i += 3
-        # less than
+        # less than: program[p3] = 1 if p1 < p2 else 0
         elif op == 7:
             p1 = program[i + 1]
             p2 = program[i + 2]
@@ -86,7 +86,7 @@ def run(program: list[int]) -> int:
             program[pos] = 1 if x < y else 0
 
             i += 4
-        # equals
+        # equals: program[p3] = 1 if p1 == p2 else 0
         elif op == 8:
             p1 = program[i + 1]
             p2 = program[i + 2]
