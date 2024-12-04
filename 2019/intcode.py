@@ -76,7 +76,6 @@ def run(program: list[int]) -> int:
                 i += 3
         # less than
         elif op == 7:
-            print(f"less than={ins}")
             p1 = program[i + 1]
             p2 = program[i + 2]
             pos = program[i + 3]
@@ -89,7 +88,6 @@ def run(program: list[int]) -> int:
             i += 4
         # equals
         elif op == 8:
-            print(f"equals={ins}")
             p1 = program[i + 1]
             p2 = program[i + 2]
             pos = program[i + 3]
