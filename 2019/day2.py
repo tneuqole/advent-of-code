@@ -1,16 +1,13 @@
-from copy import copy
 from datetime import datetime
 
-from inputs import input2
+from inputs import get_program, input2
 from intcode import run
 
 start = datetime.now()
 
-input = [int(i) for i in input2.split(",")]
-
 
 def day2p1():
-    p = copy(input)
+    p = get_program(input2)
     p[1] = 12
     p[2] = 2
     return run(p)
@@ -19,7 +16,7 @@ def day2p1():
 def day2p2():
     for i in range(100):
         for j in range(100):
-            p = copy(input)
+            p = get_program(input2)
             p[1] = i
             p[2] = j
             if run(p) == 19690720:

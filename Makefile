@@ -6,4 +6,4 @@ format:
 
 .PHONY: test
 test:
-	echo "1\n5\n" | uv run pytest 2019/ -s
+	echo "1\n5\n1\n2\n" | uv run pytest 2019/ -s

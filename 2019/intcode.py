@@ -1,12 +1,40 @@
-# interpret parameter as position (index in memory)
-POSITION_MODE = "0"
+def parse_param(mode: str, param: int, program: list[int], relative_base: int) -> int:
+    # position mode
+    if mode == "0":
+        extend_memory(program, param)
+        return program[param]
+    # immediate mode
+    elif mode == "1":
+        return param
+    # relative mode
+    elif mode == "2":
+        pos = param + relative_base
+        extend_memory(program, pos)
+        return program[pos]
+    else:
+        print(f"parse_mode: something went wrong, mode={mode}")
+        exit()
 
-# interpret parameter as value
-IMMEDIATE_MODE = "1"
+
+def get_pos(mode: str, param: int, relative_base: int) -> int:
+    if mode == "0":
+        return param
+    elif mode == "2":
+        return param + relative_base
+    else:
+        print(f"get_pos: something went wrong, mode={mode}")
+        exit()
+
+
+def extend_memory(program: list[int], pos: int):
+    if pos < len(program):
+        return
+
+    program.extend([0 for _ in range(pos - len(program) + 1)])
 
 
 def run(program: list[int]) -> int:
-    i = 0
+    i, relative_base = 0, 0
     while i < len(program):
         ins = str(program[i])
         ins = "0" * (5 - len(ins)) + ins
@@ -18,10 +46,12 @@ def run(program: list[int]) -> int:
         if op == 1:
             p1 = program[i + 1]
             p2 = program[i + 2]
-            pos = program[i + 3]
+            p3 = program[i + 3]
 
-            x = program[p1] if modes[2] == POSITION_MODE else p1
-            y = program[p2] if modes[1] == POSITION_MODE else p2
+            x = parse_param(modes[2], p1, program, relative_base)
+            y = parse_param(modes[1], p2, program, relative_base)
+            pos = get_pos(modes[0], p3, relative_base)
+            extend_memory(program, pos)
 
             program[pos] = x + y
 
@@ -30,24 +60,33 @@ def run(program: list[int]) -> int:
         elif op == 2:
             p1 = program[i + 1]
             p2 = program[i + 2]
-            pos = program[i + 3]
+            p3 = program[i + 3]
 
-            x = program[p1] if modes[2] == POSITION_MODE else p1
-            y = program[p2] if modes[1] == POSITION_MODE else p2
+            x = parse_param(modes[2], p1, program, relative_base)
+            y = parse_param(modes[1], p2, program, relative_base)
+            pos = get_pos(modes[0], p3, relative_base)
+            extend_memory(program, pos)
 
             program[pos] = x * y
 
             i += 4
         # stdin: program[p1] = input()
         elif op == 3:
-            pos = program[i + 1]
+            p1 = program[i + 1]
+
+            pos = get_pos(modes[2], p1, relative_base)
+            extend_memory(program, pos)
+
             program[pos] = int(input("> "))
 
             i += 2
         # stdout: print(program[p1])
         elif op == 4:
-            pos = program[i + 1]
-            print(program[pos])
+            p1 = program[i + 1]
+
+            x = parse_param(modes[2], p1, program, relative_base)
+
+            print(f"output={x}")
 
             i += 2
         # jump if truthy: i = p2 if p1
@@ -55,8 +94,8 @@ def run(program: list[int]) -> int:
             p1 = program[i + 1]
             p2 = program[i + 2]
 
-            x = program[p1] if modes[2] == POSITION_MODE else p1
-            jump_to = program[p2] if modes[1] == POSITION_MODE else p2
+            x = parse_param(modes[2], p1, program, relative_base)
+            jump_to = parse_param(modes[1], p2, program, relative_base)
 
             if x > 0:
                 i = jump_to
@@ -67,8 +106,8 @@ def run(program: list[int]) -> int:
             p1 = program[i + 1]
             p2 = program[i + 2]
 
-            x = program[p1] if modes[2] == POSITION_MODE else p1
-            jump_to = program[p2] if modes[1] == POSITION_MODE else p2
+            x = parse_param(modes[2], p1, program, relative_base)
+            jump_to = parse_param(modes[1], p2, program, relative_base)
 
             if x == 0:
                 i = jump_to
@@ -78,10 +117,12 @@ def run(program: list[int]) -> int:
         elif op == 7:
             p1 = program[i + 1]
             p2 = program[i + 2]
-            pos = program[i + 3]
+            p3 = program[i + 3]
 
-            x = program[p1] if modes[2] == POSITION_MODE else p1
-            y = program[p2] if modes[1] == POSITION_MODE else p2
+            x = parse_param(modes[2], p1, program, relative_base)
+            y = parse_param(modes[1], p2, program, relative_base)
+            pos = get_pos(modes[0], p3, relative_base)
+            extend_memory(program, pos)
 
             program[pos] = 1 if x < y else 0
 
@@ -90,18 +131,28 @@ def run(program: list[int]) -> int:
         elif op == 8:
             p1 = program[i + 1]
             p2 = program[i + 2]
-            pos = program[i + 3]
+            p3 = program[i + 3]
 
-            x = program[p1] if modes[2] == POSITION_MODE else p1
-            y = program[p2] if modes[1] == POSITION_MODE else p2
+            x = parse_param(modes[2], p1, program, relative_base)
+            y = parse_param(modes[1], p2, program, relative_base)
+            pos = get_pos(modes[0], p3, relative_base)
+            extend_memory(program, pos)
 
             program[pos] = 1 if x == y else 0
 
             i += 4
+        # adjust relative base
+        elif op == 9:
+            p1 = program[i + 1]
+
+            relative_base += parse_param(modes[2], p1, program, relative_base)
+
+            i += 2
+        # halt
         elif op == 99:
             break
         else:
-            print(f"something went wrong, ins={ins}")
-            return 0
+            print(f"run: something went wrong, ins={ins}")
+            exit()
 
     return program[0]
