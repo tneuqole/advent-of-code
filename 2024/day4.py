@@ -14,81 +14,83 @@ for r in range(max_r):
             continue
 
         # E
-        if not (c + 3 >= max_c):
-            if (
-                input[r][c] + input[r][c + 1] + input[r][c + 2] + input[r][c + 3]
-                == "XMAS"
-            ):
-                ans1 += 1
+        if c + 3 < max_c and (
+            input[r][c] + input[r][c + 1] + input[r][c + 2] + input[r][c + 3] == "XMAS"
+        ):
+            ans1 += 1
 
         # W
-        if not (c - 3 < 0):
-            if (
-                input[r][c] + input[r][c - 1] + input[r][c - 2] + input[r][c - 3]
-                == "XMAS"
-            ):
-                ans1 += 1
+        if c - 3 >= 0 and (
+            input[r][c] + input[r][c - 1] + input[r][c - 2] + input[r][c - 3] == "XMAS"
+        ):
+            ans1 += 1
 
         # N
-        if not (r - 3 < 0):
-            if (
-                input[r][c] + input[r - 1][c] + input[r - 2][c] + input[r - 3][c]
-                == "XMAS"
-            ):
-                if r == 9 and c == 9:
-                    print("hello")
-                ans1 += 1
+        if r - 3 >= 0 and (
+            input[r][c] + input[r - 1][c] + input[r - 2][c] + input[r - 3][c] == "XMAS"
+        ):
+            ans1 += 1
         # S
-        if not (r + 3 > max_r - 1):
-            if (
-                input[r][c] + input[r + 1][c] + input[r + 2][c] + input[r + 3][c]
-                == "XMAS"
-            ):
-                ans1 += 1
+        if r + 3 < max_r and (
+            input[r][c] + input[r + 1][c] + input[r + 2][c] + input[r + 3][c] == "XMAS"
+        ):
+            ans1 += 1
 
         # NE
-        if not (r - 3 < 0 or c + 3 >= max_c):
-            if (
+        if (
+            r - 3 >= 0
+            and c + 3 < max_c
+            and (
                 input[r][c]
                 + input[r - 1][c + 1]
                 + input[r - 2][c + 2]
                 + input[r - 3][c + 3]
                 == "XMAS"
-            ):
-                ans1 += 1
+            )
+        ):
+            ans1 += 1
 
         # NW
-        if not (r - 3 < 0 or c - 3 < 0):
-            if (
+        if (
+            r - 3 >= 0
+            and c - 3 >= 0
+            and (
                 input[r][c]
                 + input[r - 1][c - 1]
                 + input[r - 2][c - 2]
                 + input[r - 3][c - 3]
                 == "XMAS"
-            ):
-                ans1 += 1
+            )
+        ):
+            ans1 += 1
 
         # SE
-        if not (r + 3 > max_r - 1 or c + 3 > max_c - 1):
-            if (
+        if (
+            r + 3 < max_r
+            and c + 3 < max_c
+            and (
                 input[r][c]
                 + input[r + 1][c + 1]
                 + input[r + 2][c + 2]
                 + input[r + 3][c + 3]
                 == "XMAS"
-            ):
-                ans1 += 1
+            )
+        ):
+            ans1 += 1
 
         # SW
-        if not (r + 3 > max_r - 1 or c - 3 < 0):
-            if (
+        if (
+            r + 3 < max_r
+            and c - 3 >= 0
+            and (
                 input[r][c]
                 + input[r + 1][c - 1]
                 + input[r + 2][c - 2]
                 + input[r + 3][c - 3]
                 == "XMAS"
-            ):
-                ans1 += 1
+            )
+        ):
+            ans1 += 1
 
 print(ans1)
 
