@@ -1,3 +1,4 @@
+from collections import deque
 from datetime import datetime
 
 from inputs import get_program, input5
@@ -8,12 +9,12 @@ start = datetime.now()
 
 def day5p1():
     p = get_program(input5)
-    return run(p)
+    return run(p, inputs=deque([1]))
 
 
 def day5p2():
     p = get_program(input5)
-    return run(p)
+    return run(p, inputs=deque([5]))
 
 
 if __name__ == "__main__":

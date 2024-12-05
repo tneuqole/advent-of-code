@@ -10,7 +10,8 @@ def day2p1():
     p = get_program(input2)
     p[1] = 12
     p[2] = 2
-    return run(p)
+    run(p)
+    return p[0]
 
 
 def day2p2():
@@ -19,7 +20,8 @@ def day2p2():
             p = get_program(input2)
             p[1] = i
             p[2] = j
-            if run(p) == 19690720:
+            run(p)
+            if p[0] == 19690720:
                 return i * 100 + j
 
 

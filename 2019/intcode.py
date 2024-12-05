@@ -1,3 +1,5 @@
+
+
 def parse_param(mode: str, param: int, program: list[int], relative_base: int) -> int:
     # position mode
     if mode == "0":
@@ -33,7 +35,8 @@ def extend_memory(program: list[int], pos: int):
     program.extend([0 for _ in range(pos - len(program) + 1)])
 
 
-def run(program: list[int]) -> int:
+def run(program: list[int], inputs=None) -> list[int]:
+    outputs = []
     i, relative_base = 0, 0
     while i < len(program):
         ins = str(program[i])
@@ -77,7 +80,10 @@ def run(program: list[int]) -> int:
             pos = get_pos(modes[2], p1, relative_base)
             extend_memory(program, pos)
 
-            program[pos] = int(input("> "))
+            if inputs:
+                program[pos] = inputs.popleft()
+            else:
+                program[pos] = int(input("> "))
 
             i += 2
         # stdout: print(program[p1])
@@ -86,7 +92,8 @@ def run(program: list[int]) -> int:
 
             x = parse_param(modes[2], p1, program, relative_base)
 
-            print(f"output={x}")
+            # print(x)
+            outputs.append(x)
 
             i += 2
         # jump if truthy: i = p2 if p1
@@ -155,4 +162,4 @@ def run(program: list[int]) -> int:
             print(f"run: something went wrong, ins={ins}")
             exit()
 
-    return program[0]
+    return outputs
