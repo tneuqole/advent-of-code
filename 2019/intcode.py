@@ -1,4 +1,4 @@
-import queue
+from queue import Queue
 
 
 def parse_param(mode: str, param: int, program: list[int], relative_base: int) -> int:
@@ -36,7 +36,7 @@ def extend_memory(program: list[int], pos: int):
     program.extend([0 for _ in range(pos - len(program) + 1)])
 
 
-def run(program: list[int], inputs: queue.Queue, outputs: queue.Queue):
+def run(program: list[int], inputs: Queue, outputs: Queue):
     i, relative_base = 0, 0
     while i < len(program):
         ins = str(program[i])

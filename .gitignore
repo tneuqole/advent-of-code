@@ -1,11 +1,9 @@
 **/*.txt
 **/__pycache__
-**/input.py
-**/input
-**/test
+input*
+test*
 tmp/
 aoc
 .env
 log
-test*
 *.sh
