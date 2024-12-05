@@ -1,6 +1,6 @@
-import pytest
 from day2 import day2p1, day2p2
 from day5 import day5p1, day5p2
+from day7 import day7p1, day7p2
 from day9 import day9p1, day9p2
 
 
@@ -9,7 +9,10 @@ def test_run():
     assert day2p2() == 3146
 
     assert day5p1()[-1] == 13210611
-    assert day5p2()[-1] == 584126
+    assert day5p2() == 584126
 
-    assert day9p1()[0] == 3280416268
-    assert day9p2()[0] == 80210
+    assert day7p1() == 277328
+    assert day7p2() == 11304734
+
+    assert day9p1() == 3280416268
+    assert day9p2() == 80210

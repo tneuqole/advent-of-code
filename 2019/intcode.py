@@ -1,3 +1,4 @@
+import queue
 
 
 def parse_param(mode: str, param: int, program: list[int], relative_base: int) -> int:
@@ -35,8 +36,7 @@ def extend_memory(program: list[int], pos: int):
     program.extend([0 for _ in range(pos - len(program) + 1)])
 
 
-def run(program: list[int], inputs=None) -> list[int]:
-    outputs = []
+def run(program: list[int], inputs: queue.Queue, outputs: queue.Queue):
     i, relative_base = 0, 0
     while i < len(program):
         ins = str(program[i])
@@ -80,10 +80,7 @@ def run(program: list[int], inputs=None) -> list[int]:
             pos = get_pos(modes[2], p1, relative_base)
             extend_memory(program, pos)
 
-            if inputs:
-                program[pos] = inputs.popleft()
-            else:
-                program[pos] = int(input("> "))
+            program[pos] = inputs.get()
 
             i += 2
         # stdout: print(program[p1])
@@ -92,8 +89,7 @@ def run(program: list[int], inputs=None) -> list[int]:
 
             x = parse_param(modes[2], p1, program, relative_base)
 
-            # print(x)
-            outputs.append(x)
+            outputs.put_nowait(x)
 
             i += 2
         # jump if truthy: i = p2 if p1
@@ -161,5 +157,3 @@ def run(program: list[int], inputs=None) -> list[int]:
         else:
             print(f"run: something went wrong, ins={ins}")
             exit()
-
-    return outputs

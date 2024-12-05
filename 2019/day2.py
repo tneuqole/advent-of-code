@@ -1,4 +1,5 @@
 from datetime import datetime
+from queue import Queue
 
 from inputs import get_program, input2
 from intcode import run
@@ -10,7 +11,7 @@ def day2p1():
     p = get_program(input2)
     p[1] = 12
     p[2] = 2
-    run(p)
+    run(p, Queue(), Queue())
     return p[0]
 
 
@@ -20,7 +21,7 @@ def day2p2():
             p = get_program(input2)
             p[1] = i
             p[2] = j
-            run(p)
+            run(p, Queue(), Queue())
             if p[0] == 19690720:
                 return i * 100 + j
 
