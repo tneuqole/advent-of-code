@@ -70,8 +70,7 @@ def p2(r_start, c_start, coords):
             c -= d[1]
             d = DIRS[DIRS.index(d) + 1] if DIRS.index(d) != 3 else DIRS[0]
 
-        if loop:
-            ans += 1
+        ans += int(loop)
 
     print(ans)
 
