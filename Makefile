@@ -7,3 +7,8 @@ fmt:
 .PHONY: test
 test:
 	uv run pytest 2019/
+
+.PHONY: new
+new:
+	cp templates/template.py $(y)/day$(d).py
+

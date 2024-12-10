@@ -8,7 +8,7 @@ from pprint import pprint
 
 start = datetime.now()
 
-input = open(0).read().splitlines()
-pprint(input)
+data = open(0).read().splitlines()
+pprint(data)
 
 print(f"took={datetime.now() - start}")
