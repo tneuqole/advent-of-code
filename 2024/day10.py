@@ -1,10 +1,5 @@
-import functools
-import itertools
-import re
-from collections import defaultdict, deque
-from copy import copy, deepcopy
+from collections import deque
 from datetime import datetime
-from pprint import pprint
 
 start = datetime.now()
 

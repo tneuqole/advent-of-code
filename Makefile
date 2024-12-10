@@ -1,5 +1,5 @@
-.PHONY: format
-format:
+.PHONY: fmt
+fmt:
 	-uv run ruff check --fix
 	uv run isort .
 	uv run ruff format
