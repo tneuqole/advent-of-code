@@ -15,16 +15,6 @@ def solve(f):
         px = int(data[i + 2].split(" ")[1][2:-1]) + f
         py = int(data[i + 2].split(" ")[2][2:]) + f
 
-        # axA + bxB = px, ayA + byB = py
-
-        # multiply eq1 * ay, eq2 * ax
-        # ayaxA + aybxB = aypx, axayA + axbyB = axpy
-
-        # subtract eq2 - eq1
-        # axayA + axbyB - ayaxA - aybxB = axpy - aypx
-
-        # B = (axpy - aypx) / (axby - aybx)
-
         B = (ax * py - ay * px) // (ax * by - ay * bx)
         A = (px - B * bx) // ax
 
