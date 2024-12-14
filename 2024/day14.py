@@ -7,7 +7,7 @@ start = datetime.now()
 data = open(0).read().splitlines()
 
 W, H = 101, 103
-mw, mh = W // 2 - 1, H // 2 - 1
+mw, mh = W // 2, H // 2
 coords = defaultdict(int)
 robots = []
 for row in data:
@@ -22,13 +22,13 @@ for row in data:
     newx = (vx * 100 + x) % W
     newy = (vy * 100 + y) % H
 
-    if newx <= mw and newy <= mh:
+    if newx < mw and newy < mh:
         coords[0] += 1
-    elif newx >= mw + 2 and newy <= mh:
+    elif newx > mw and newy < mh:
         coords[1] += 1
-    elif newx <= mw and newy >= mh + 2:
+    elif newx < mw and newy > mh:
         coords[2] += 1
-    elif newx >= mw + 2 and newy >= mh + 2:
+    elif newx > mw and newy > mh:
         coords[3] += 1
 
 print(functools.reduce(lambda a, b: a * b, coords.values()))

@@ -19,7 +19,7 @@ def solve(f):
         A = (px - B * bx) // ax
 
         if A * ax + B * bx == px and A * ay + B * by == py:
-            ans += A * 3 + B * 1
+            ans += A * 3 + B
 
         i += 4
 
