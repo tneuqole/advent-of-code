@@ -1,6 +1,7 @@
 import functools
 import itertools
 import re
+import heapq
 from collections import defaultdict, deque
 from copy import copy, deepcopy
 from datetime import datetime
