@@ -42,22 +42,17 @@ def move(a, b, neg, pos):
 
 
 def get_moves(u, v):
-    path = move(u[0], v[0], "<", ">") + move(u[1], v[1], "v", "^")
-    paths = set(itertools.permutations(path))
+    paths = itertools.permutations(
+        move(u[0], v[0], "<", ">") + move(u[1], v[1], "v", "^")
+    )
     possible = set()
     for p in paths:
         x, y = u
         ok = True
         for m in p:
-            if m == "<":
-                x -= 1
-            elif m == ">":
-                x += 1
-            elif m == "v":
-                y -= 1
-            elif m == "^":
-                y += 1
-
+            d = {"<": (-1, 0), ">": (1, 0), "v": (0, -1), "^": (0, 1)}[m]
+            x += d[0]
+            y += d[1]
             if (x, y) == (-2, 0):
                 ok = False
                 break
@@ -65,10 +60,10 @@ def get_moves(u, v):
         if ok:
             possible.add(f"{''.join(p)}A")
 
-    return tuple(possible)
+    return possible
 
 
-@functools.lru_cache(maxsize=None)
+@functools.cache
 def recurse(seq, u, robots, use_numpad):
     keypad = numpad if use_numpad else dirpad
     if not seq:
