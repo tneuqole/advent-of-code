@@ -10,6 +10,8 @@ from pprint import pprint
 
 start = datetime.now()
 
+DIRS = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
 data = open(0).read().splitlines()
 pprint(data)
 
