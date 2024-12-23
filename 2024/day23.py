@@ -38,11 +38,9 @@ def solve(c1, conns):
     conns.add(c1)
     result = set(conns)
     for c2 in computers[c1]:
-        # print(c1, c2)
-        # print(conns, computers[c2], conns - computers[c2])
         if conns - computers[c2]:
             continue
-        # if c1 in computers[c2]:
+
         n_conns = solve(c2, tuple(conns))
         if len(n_conns) > len(result):
             result = n_conns
