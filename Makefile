@@ -10,5 +10,5 @@ test:
 
 .PHONY: new
 new:
-	cp templates/template.py $(y)/day$(d).py
+	cp ./templates/template.py ./$(y)/day$(d).py
 
